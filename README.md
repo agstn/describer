@@ -1,6 +1,6 @@
 # describer
 
-<img src="https://raw.githubusercontent.com/agstn/describer/main/inst/hex/hex-describer.png" width="50%" height="50%">
+<img src="https://raw.githubusercontent.com/agstn/describer/main/inst/hex/hex-describer.png" width="30%" height="30%">
 
 > "If I take it up I must understand every detail," said he. "Take time to consider. The smallest point may be the most essential." --- Sherlock Holmes The Adventure of the Red Circle
 
