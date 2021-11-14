@@ -1,0 +1,25 @@
+.main-container {
+max-width:    1200px;
+margin-left:  auto;
+margin-right: auto;}
+
+.hidden-column-headers .rt-thead {
+position: absolute;
+width: 1px;
+height: 1px;
+padding: 0;
+margin: -1px;
+overflow: hidden;
+clip: rect(0, 0, 0, 0);
+border: 0;
+}
+
+.rt-search{
+align-self: baseline;
+width: 400px;
+margin-bottom: 0px;
+}
+
+svg.main-svg{
+overflow:visible !important;
+}

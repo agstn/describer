@@ -1,0 +1,28 @@
+---
+params:
+    study:  "CDISCPILOT01"
+    file:   "adsl.xpt"
+title:      "Protocol: `r toupper(params$study)`"
+subtitle:   "Data: **`r toupper(params$file)`**"  
+date:       "Created: `r format(Sys.time(),format='%A %d %b %Y  %I:%M %p %Z')`"
+output:     html_document 
+---
+
+```{r echo=FALSE} 
+knitr::opts_chunk$set(echo = FALSE, warnings = FALSE, message = FALSE) 
+```
+
+```{r echo=FALSE}
+library(tidyverse)
+library(haven)
+
+adsl <-read_xpt(str_glue("https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdiscpilot01/{params$file}")) %>%
+    select(SUBJID, SITEID, ARM, AGE, SEX, RACE, ETHNIC,
+           TRT01A, SAFFL, VISIT1DT, TRTSDT, TRTEDT,
+           MMSETOT, BMIBL, HEIGHTBL, WEIGHTBL , DSRAEFL, DTHFL)
+```
+
+```{r echo=FALSE, results = 'asis', warning=FALSE}
+library(Hmisc)
+html(describe(adsl, digits = 3), size=80, width="100%", scroll = FALSE)
+```

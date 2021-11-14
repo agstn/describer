@@ -1,0 +1,44 @@
+---
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    toc: true
+params:
+  child: yes
+---
+
+The **describer** package provides an interface for the interactive table
+
+\
+**describer** consists of two main functions:
+
+\
+- `describe_data()`: creates a comprehensive tibble of variable metadata using **Hmisc::describe** as the engine
+
+\- `describer()`: creates an interactive table using **Hmisc::describe** + **reactable**.
+
+##### Using `describer()`:
+
+##### 1. Input
+
+The input to `describer()` is a tibble that is produced by `describe_data()`.
+
+##### 2. Output
+
+The output of `describer()` is a reactable display with columns for variable number (NO), type of variable (TYPE), variable name and label (VARIABLE), number observed (OBSERVED), number and percent missing (MISSING), number of unique values (DISTINCT), and an interactive display (INTERACTIVE FIGURE).
+
+For each variable, there is additional dropdown details based on variable type (character, numeric, date), which are viewable by selecting `r fontawesome::fa("caret-right")`.
+
+##### 3. Adding Interactivity
+
+Built-in Interactivity:
+
+\- *Search*: Search the dataset variables by label
+
+- *Sort*: Sort columns of the reactable variables (alphabetically or numerically)
+
+\- *Figures*: Interactive figures are provided for each dataset variable dependent on variable type. Zoom and hover for more details.
+
+Additional Interactivity:
+
+\- *Filters*: Filters can be created for any of the columns of the describe_data by adding **crosstalk** widgets and specifying a 'SharedData' object in the `describer()` function. Examples shown include subsetting by variable type and filtering based on % missing.
