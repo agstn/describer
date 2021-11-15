@@ -38,7 +38,7 @@ describe_data <- function(data){
                                ) %>%
                                unique %>%
                                rename(LABEL = label, UNITS = units, FORMAT = `format.sas`))) %>%
-    unnest(cols=attributes) %>%
+    unnest(cols=attributes, keep_empty = TRUE) %>%
     rowwise %>%
     mutate(
       TYPE = case_when(
