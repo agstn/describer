@@ -11,4 +11,4 @@ For some time now we wanted to modernize the aforementioned describe function to
 
 For this challenge we selected a [CDISC](https://www.cdisc.org/) (Clinical Data Interchange Standards Consortium) [ADaM](https://www.cdisc.org/standards/foundational/adam) (Analysis Data Model) ADSL (Analysis Data Subject Level) subset dataset as an illustration. The ADSL dataset structure is one record per subject and contains variables such as subject-level population flags, planned and actual treatment variables, demographic information, randomization factors, subgrouping variables, and important dates originated from the [PHUSE CDISC Pilot replication study](https://github.com/phuse-org/phuse-scripts/tree/master/data/adam/cdisc).
 
-<img src="https://raw.githubusercontent.com/agstn/describer/main/inst/images/screenshot.png" width="75%" height="75%">
+<img src="https://raw.githubusercontent.com/agstn/describer/main/inst/images/screenshot.png" width="100%" height="100%">
