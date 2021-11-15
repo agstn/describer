@@ -2,7 +2,7 @@ Package: describer
 Type: Package
 Title: An interactive codebook creater powered by Hmisc::describe
 Version: 0.1.0
-Author: Agustin Calatroni, Becca Krouse
+Author: Agustin Calatroni, Becca Krouse, Stephanie Lussier
 Maintainer: Agustin Calatroni <agustin_calatroni@rhoworld.com>
 Description: The describer package is an interactive framework for viewing data summaries 
         produced by Frank Harrell's Hmisc::describe and powered by reactable. 
@@ -14,6 +14,7 @@ Depends:
 Imports:
     tidyverse,
     haven,
+    lubridate,
     Hmisc,
     plotly,
     htmltools,
