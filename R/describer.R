@@ -59,8 +59,6 @@ describer <- function(data, data_shared = NULL){
     data_shared <- data
   }
 
-  dim <- dim(data)
-
   reactable(
     data_shared,
     searchable = TRUE,
@@ -100,7 +98,7 @@ describer <- function(data, data_shared = NULL){
         cell = function(value, index) {
           htmltools::tagList(
             htmltools::div(style = list(fontWeight= 'bold'), data$VAR[index]),
-            htmltools::div(style = list(fontSize = 12, color = "#999"), value),
+            htmltools::div(style = list(fontSize = 12, color = "#999"), ifelse(!is.na(value), value, '')),
             htmltools::div(style = list(fontSize = 12, color = "#999"), ifelse(!is.na(data$FORMAT[index]), paste("fmt:",data$FORMAT[index]), '')),
             htmltools::div(style = list(fontSize = 12, color = "#999"), ifelse(!is.na(data$UNITS[index]),  paste("units:",data$UNITS[index]), ''))
           )
@@ -125,12 +123,15 @@ describer <- function(data, data_shared = NULL){
                  sortable = TRUE,
                  style = list(fontFamily = "monospace", whiteSpace = "pre"),
                  cell = data_bars(data,
-                                  max_value = dim[1],
+                                  max_value = max(data$n),
                                   text_size = 14,
                                   text_position = 'outside-base',
                                   fill_color = '#2780e3',
                                   fill_opacity = 0.5,
-                                  background = 'lightgrey')),
+                                  background = ifelse(min(data$n)==max(data$n),
+                                                      "#2780E380",
+                                                      'lightgrey'))
+      ),
 
       missing = colDef(name = '<small>Missing</small>',
                        html = TRUE,
