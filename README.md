@@ -1,7 +1,7 @@
 # describer
 ## RStudio Table Contest 2021 Submission
 
-<img src="https://raw.githubusercontent.com/agstn/describer/main/inst/hex/hex-describer.png" width="30%" height="30%">
+<img src="https://raw.githubusercontent.com/agstn/describer/main/inst/hex/hex-describer.png" width="20%" height="20%">
 
 > "If I take it up I must understand every detail," said he. "Take time to consider. The smallest point may be the most essential." --- Sherlock Holmes The Adventure of the Red Circle
 
