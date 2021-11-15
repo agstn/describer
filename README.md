@@ -1,9 +1,10 @@
 # describer
-## RStudio Table Contest 2021 Submission
 
 <img src="https://raw.githubusercontent.com/agstn/describer/main/inst/hex/hex-describer.png" width="20%" height="20%">
 
 > "If I take it up I must understand every detail," said he. "Take time to consider. The smallest point may be the most essential." --- Sherlock Holmes The Adventure of the Red Circle
+
+## RStudio Table Contest 2021 Submission
 
 For a couple of [decades](https://twitter.com/f2harrell/status/1449014869798395905) we have been loyal users of the [Hmisc](https://cran.r-project.org/web/packages/Hmisc/index.html) package in general and the [describe](https://rdrr.io/cran/Hmisc/man/describe.html) function in particular as a way to explore data before any analyses. As it is often the case in the R ecosystem, there are numerous ways to accomplish this task (see summarizing data blogs [here](https://dabblingwithdata.wordpress.com/2018/01/02/my-favourite-r-package-for-summarising-data) and [here](https://dabblingwithdata.wordpress.com/2018/02/26/r-packages-for-summarising-data-part-2/) for a dated but yet extensive review). Our love affair with `Hmisc::describe` was it concise look pre [rmarkdown](https://rmarkdown.rstudio.com/) days (Sweave/Latex/PDF) and it's linking with SAS formatted data sets (for example labels, formats, special missing). Indeed, in the clinical research industry, SAS, especially SAS formatted data sets (SAS transport `.xpt` or native `.sas7bdat` files) remain widely used albeit the programming language has somehow lost its monopoly with the ever more presence of another language, R, in particular, [R/Pharma](https://rinpharma.com/). [Dr. Frank Harrell](https://www.fharrell.com/) which developed the Hmisc package has been from our perspective a luminary as he layout the possibilities embedded in the R language especially in the clinical research environment.
 
