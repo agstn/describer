@@ -84,16 +84,18 @@ knitr::include_app("rmd/adsl_describe.html", height = "875px")
 Column {data-width=200}
 -------------------------------------
 
-Every time a dataset is created, either for data management  proposes or for statistical analyses, 
-it is imperative that the each variable be reviewed. Not only should the evaluation provide summary 
+### About Hmisc::describe
+
+Every time a dataset is created, either for data management purposes or for statistical analyses, 
+it is imperative that each variable be reviewed. Not only should the evaluation provide summary 
 statistics and graphical displays to detect data errors, it should also present the results in a 
 thorough, but succinct manner. To accomplish this goal, descriptive summaries for each variable 
 should be created according to their characteristics.
 
 The best available option for generating descriptive data set summaries is found in the [Hmisc: Harrell Miscellaneous](https://cran.r-project.org/web/packages/Hmisc/index.html) package for the 
-R statistical programming environment. The function [``describe``](https://rdrr.io/cran/Hmisc/man/describe.html) 
+R statistical programming environment. The [``describe``](https://rdrr.io/cran/Hmisc/man/describe.html) 
 function determines whether the variable is character, factor, category, binary, discrete numeric, 
-and continuous numeric, and prints a concise statistical summary according to each.
+or continuous numeric and prints a concise statistical summary according to each.
 
 Of note:
 
@@ -118,7 +120,7 @@ Column
 Column {.tabset}
 -------------------------------------
 
-### <i class="wrench"></i> **INSTRUCTIONS** 
+### <i class="fas fa-wrench"></i> **INSTRUCTIONS** 
 
 ```{r child = 'rmd/instructions.rmd'}
 ```

@@ -1,6 +1,6 @@
 Package: describer
 Type: Package
-Title: An interactive codebook creater powered by Hmisc::describe
+Title: An interactive table interface for data summaries
 Version: 0.1.0
 Author: Agustin Calatroni, Becca Krouse, Stephanie Lussier
 Maintainer: Agustin Calatroni <agustin_calatroni@rhoworld.com>

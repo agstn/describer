@@ -12,9 +12,9 @@ The {**describer**} package provides an interface for the interactive table
 {**describer**} consists of two main functions:
 
 
-- `describe_data()`: creates a comprehensive tibble of variable metadata using `**Hmisc::describe**` as the engine
+- `describe_data()`: creates a comprehensive tibble of variable metadata using `Hmisc::describe` as the engine
 
-- `describer()`: creates an interactive table using `**Hmisc::describe**` + `**reactable**`.
+- `describer()`: creates an interactive table using `Hmisc::describe` + `reactable`.
 
 ---
 
@@ -33,13 +33,15 @@ Create a tibble summary of the dataset using `Hmisc::describe` as the engine. Th
 dat_descr <- describe_data(data)
 ```
 
-Display results using `describer()`, which creates a `reactable` display with columns for variable number (NO), type of variable (TYPE), variable name and label (VARIABLE), number observed (OBSERVED), number and percent missing (MISSING), number of unique values (DISTINCT), and an interactive display (INTERACTIVE FIGURE).
+Display results using `describer()`, which creates a `reactable` display with columns for variable number (NO), type of variable (TYPE), variable name and label (NAME - LABEL), number observed (OBSERVED), number and percent missing (MISSING), number of unique values (DISTINCT), and an interactive display (INTERACTIVE FIGURE).
 
 For each variable, there is additional dropdown details based on variable type (character, numeric, date), which are viewable by selecting `r fontawesome::fa("caret-right")`.
 
 ```r
 describer(dat_descr)
 ```
+
+---
 
 ##### Interactivity:
 
@@ -54,3 +56,14 @@ describer(dat_descr)
 - Additional Interactivity:
 
   - *Filters*: We can add linked filters by leveraging the power of {**crosstalk**}. Filters can be created for any of the columns of the describe_data by adding **crosstalk** widgets and specifying a 'SharedData' object in the `describer()` function. In this example, we offer subsetting by variable type and filtering based on % missing in the sidebar.
+
+---
+
+##### Dependencies:
+
+Install the latest development version of the `reactable` and `reactablefmtr` packages from GitHub:
+
+```r
+devtools::install_github("glin/reactable")
+devtools::install_github("kcuilla/reactablefmtr")
+```
