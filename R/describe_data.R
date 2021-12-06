@@ -46,15 +46,17 @@ describe_data <- function(data){
         lubridate::is.Date(x) | lubridate::is.POSIXct(x) | lubridate::is.POSIXlt(x) ~ "DT",
         is.numeric(x) ~ "NUM"
       ),
-      describe = Hmisc::describe(x, digits = 3) %>% list(),
+      describe = Hmisc::describe(x, digits = 3, exclude.missing = FALSE) %>% list(),
       counts   = describe$counts %>% list(),
       values   = describe$values %>% list(),
       extremes = describe$extremes %>% list()) %>%
     mutate( n        = counts %>% purrr::pluck('n')                       %>% as.numeric(),
             missing  = counts %>% purrr::pluck('missing',  .default = NA) %>% as.numeric(),
             distinct = counts %>% purrr::pluck('distinct', .default = NA) %>% as.numeric() )%>%
-    mutate(spike_hist = list(create_hist(x))) %>%
-    select(-x)
+    ungroup %>%
+    mutate(spike_hist =  map2(n, x, ~ if(.x==0){NULL}else{create_hist(.y)})) %>%
+    select(-x) %>%
+    rowwise
 
 
   data_nest_describe <- data_nest %>%
