@@ -32,6 +32,7 @@ type_indicator <- function(value = c("NUM", "CHAR", "DT")) {
 #'
 #' @param data Output of `describe_data()`
 #' @param data_shared [Optional] `data` converted to a `SharedData` object using crosstalk, for use with linked widgets.
+#' @param elementId Unique element ID for the table
 #'
 #' @import reactable
 #' @importFrom reactablefmtr fivethirtyeight
@@ -47,7 +48,7 @@ type_indicator <- function(value = c("NUM", "CHAR", "DT")) {
 #' adsl_describe <- describe_data(adsl)
 #' describer(adsl_describe)
 #'
-describer <- function(data, data_shared = NULL){
+describer <- function(data, data_shared = NULL, elementId = NULL){
 
   stopifnot(is.data.frame(data))
 
@@ -59,13 +60,17 @@ describer <- function(data, data_shared = NULL){
     data_shared <- data
   }
 
+  if (is.null(elementId)){
+    elementId <- "describer-table-1"
+  }
+
   tagList(
     div(
       style = "display: grid; grid-template-columns: 1fr 2fr; grid-gap: 20px; margin-bottom: 12px",
         div(
           tags$button(
             "Expand/collapse all",
-            onclick = "Reactable.toggleAllRowsExpanded('describer-table')"
+            onclick = paste0("Reactable.toggleAllRowsExpanded('", elementId, "')")
           )
         ),
         div(
@@ -73,13 +78,13 @@ describer <- function(data, data_shared = NULL){
             type = "text",
             placeholder = "Search variable name/label",
             style = "padding: 4px 8px; width: 75%",
-            oninput = "Reactable.setSearch('describer-table', this.value)"
+            oninput = paste0("Reactable.setSearch('", elementId, "', this.value)")
           )
         )
     ),
     reactable(
       data_shared,
-      elementId = "describer-table",
+      elementId = elementId,
       searchable = FALSE,
       pagination = FALSE,
       compact = TRUE,
