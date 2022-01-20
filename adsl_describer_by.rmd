@@ -1,0 +1,74 @@
+---
+params:
+    study:  'CDISCPILOT01'
+    file:   'adsl.xpt'
+    child:  no
+title:      'Study: `r params$study`  &nbsp; &nbsp; Data: `r params$file`' 
+date:       "<i class='fas fa-file-contract'></i> Created: `r format(Sys.time(),format='%A %d %b %Y  %I:%M %p %Z')`"
+output: 
+   flexdashboard::flex_dashboard:
+     css: 'inst/style/styles.css'
+     self_contained: true
+     mathjax: NULL
+     source_code: "https://github.com/agstn/describer" 
+---
+
+```{r knitr-defaults}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = NA)
+knitr::opts_chunk$set(cache = FALSE)
+options(width=170)
+```
+
+```{r load-packages}
+library(describer)
+library(tidyverse)
+library(haven)
+library(crosstalk)
+```
+
+```{r sample-vars, include=FALSE}
+adsl <-read_xpt(str_glue("https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdiscpilot01/{params$file}")) %>%
+  select(SUBJID, SITEID, ARM, AGE, SEX, RACE, ETHNIC,
+         TRT01A, SAFFL, VISIT1DT, TRTSDT, TRTEDT,
+         MMSETOT, BMIBL, HEIGHTBL, WEIGHTBL , DSRAEFL, DTHFL)
+dim  <- dim(adsl)
+adsl_nest_describe <- describe_data_by(adsl, by = ARM)
+```
+
+# DESCRIBER {#main}
+
+Inputs {.sidebar data-width=300}
+-------------------------------------
+<br> <center> ![](inst/hex/hex-describer.png){width=150px} </center> <br>
+
+```{r}
+d_reactable <- adsl_nest_describe   
+
+d_reactable_shared <- SharedData$new(d_reactable)
+
+filter_select('type', 'variable TYPE',    d_reactable_shared, ~ TYPE)
+filter_select('var',  'variable NAME',    d_reactable_shared, ~ VAR)
+filter_select('lab',  'variable LABEL',   d_reactable_shared, ~ LABEL)
+filter_select('n',    'variable COMPLETE',d_reactable_shared, ~ ifelse(n == dim[1], 'YES', 'NO'))
+
+filter_slider('missing', 'variable % MISSING', d_reactable_shared,  ~ 100*(missing/dim[1]),
+              width = 250,
+              post = '%',
+              min = 0, max = 100,
+              dragRange = FALSE,
+              step = 5, round = TRUE, sep = '', ticks = TRUE)
+
+filter_slider('distinct', 'variable # DISTINCT', d_reactable_shared, ~ distinct,
+              width = 250,
+              min = 1, dragRange = FALSE,
+              step = 5, ticks = FALSE)
+```
+
+
+Column
+-------------------------------------
+### <i class='fas fa-th'></i> **`r toupper(params$file)`** DATA with **`r dim[1]`** OBSERVATIONS and **`r dim[2]`** VARIABLES  
+
+```{r create-reactable-1}
+describer(data = d_reactable, data_shared = d_reactable_shared, by = "ARM")
+```
