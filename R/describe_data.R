@@ -29,8 +29,9 @@ describe_data <- function(data){
     mutate(ORDER = row_number()) %>%
     rowwise %>%
     mutate(attributes = list(attributes(x) %>%
+                               magrittr::extract(c("label","units","format.sas")) %>%
+                               discard(., ~ is.null(.x)) %>%
                                as_tibble %>%
-                               select(any_of(c("label","units","format.sas"))) %>%
                                bind_rows(
                                  tibble(label = character(),
                                         units = character(),
@@ -43,7 +44,7 @@ describe_data <- function(data){
     mutate(
       TYPE = case_when(
         is.character(x) | is.factor(x) | is.logical(x) ~ "CHAR",
-        lubridate::is.Date(x) | lubridate::is.POSIXct(x) | lubridate::is.POSIXlt(x) ~ "DT",
+        lubridate::is.Date(x) | lubridate::is.POSIXct(x) | lubridate::is.POSIXlt(x) ~ "DT/TIME",
         is.numeric(x) ~ "NUM"
       ),
       describe = Hmisc::describe(x, digits = 3, exclude.missing = FALSE) %>% list(),
@@ -54,15 +55,21 @@ describe_data <- function(data){
             missing  = counts %>% purrr::pluck('missing',  .default = NA) %>% as.numeric(),
             distinct = counts %>% purrr::pluck('distinct', .default = NA) %>% as.numeric() )%>%
     ungroup %>%
-    mutate(spike_hist =  map2(n, x, ~ if(.x==0){NULL}else{create_hist(.y)})) %>%
-    select(-x) %>%
-    rowwise
+    mutate(values =  map2(values, x, ~ if(is.null(.x)) {
+      tab <- table(.y)
+      list(value = names(tab) %>% as.numeric,
+           frequency = tab %>% as.vector)
+      } else {
+        .x } ))%>%
+    rowwise %>%
+    mutate(spike_hist = list(create_hist2(x, counts, values))) %>%
+    select(-x)
 
 
   data_nest_describe <- data_nest %>%
     arrange(ORDER) %>%
     mutate( counts_df = tryCatch(
-      counts[-c(1:3)] %>%
+      counts[-c(1:2)] %>%
         enframe(name = 'statistic', value = 'value') %>%
         pivot_wider(values_from = value,
                     names_from = statistic) %>%
