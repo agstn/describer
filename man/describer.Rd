@@ -4,12 +4,16 @@
 \alias{describer}
 \title{Create interactive table using Hmisc::describe + reactable}
 \usage{
-describer(data, data_shared = NULL)
+describer(data, data_shared = NULL, by = NULL, elementId = NULL)
 }
 \arguments{
 \item{data}{Output of `describe_data()`}
 
 \item{data_shared}{[Optional] `data` converted to a `SharedData` object using crosstalk, for use with linked widgets.}
+
+\item{by}{Optional name of group by variable as character string}
+
+\item{elementId}{Unique element ID for the table}
 }
 \value{
 Reactable display
